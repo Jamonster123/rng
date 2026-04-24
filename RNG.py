@@ -35,35 +35,19 @@ def start():
         rngmax = 10**setting
     print("Enter a number beteween 1 and", rngmax)
     main(rngmax, printans, 0, 0)
-"""
-if setting == "easy" or setting == "1":
-    rngmax = 10
-elif setting == "medium" or setting == "2":
-    rngmax = 100
-elif setting == "hard" or setting == "3":
-    rngmax = 1000
-elif setting == "extreme" or setting == "4":
-    rngmax = 10000
-elif setting == "insane" or setting == "5":
-    rngmax = 1000000
-elif setting == "impossible" or setting == "6":
-    rngmax = random.randint(10,50)**random.randint(10,50)
-else:
-    rngmax = 100
-    print("Invalid setting (" + setting + "), using default max of 100")
-"""
 
 def main(rngmax, printans, wins, guesses):
     num = random.randint(1,rngmax)
     while True:
         if printans == 1:
-            print(num)
+            print("The correct number is", num)
         answer = input()
         try:
             answer = int(answer)
         except:
-            if answer == "stop":
+            if answer == "stop" or answer == "break":
                 start()
+            print("To stop guessing, enter 'stop'")
             answer = -1
         if answer < 1 or answer > rngmax:
             print("Your answer,", answer, "is out of range 1-" + str(rngmax))
