@@ -3,8 +3,7 @@ import random
 def start():
     printans = 0
     invalid = 0
-    print("Please choose a setting:")
-    print(" Easy - 1-10\n Medium - 1-100\n Hard - 1-1000")
+    print("Please choose a setting:\n Easy - 1-10\n Medium - 1-100\n Hard - 1-1000")
     setting = input()
     try:
         setting = int(setting)
@@ -12,16 +11,13 @@ def start():
             invalid = 1
         elif setting > 10:
             printans = 1
-            setting = str(int(setting)-10)
+            setting = int(setting)-10
     except:
         setting = setting.lower()
-    finder = ["easy", "medium", "hard", "extreme", "insane", "none", "none", "none", "none" "impossible"]
-    try:
-        setting = int(setting)
-    except:
+        word = True
+        finder = ["easy", "medium", "hard", "extreme", "insane", "6", "7", "8", "9", "impossible"] #numbers will never reach here, just for making impossible the 10th setting
         for i in range(len(finder)):
             if setting == finder[i]:
-                print(setting)
                 setting = i+1
                 break
         else:
@@ -36,7 +32,7 @@ def start():
     print("Enter a number beteween 1 and", rngmax)
     main(rngmax, printans, 0, 0)
 
-def main(rngmax, printans, wins, guesses):
+def main(rngmax, printans, wins, guesses): #wins and guesses variables specified to initialise and reduce lines. may also allow for continuing a game
     num = random.randint(1,rngmax)
     while True:
         if printans == 1:
@@ -46,7 +42,7 @@ def main(rngmax, printans, wins, guesses):
             answer = int(answer)
         except:
             if answer == "stop" or answer == "break":
-                start()
+                start() #not sure whether this would cause a mem leak in python as the infinite loop is still on, just interrupted
             print("To stop guessing, enter 'stop'")
             answer = -1
         if answer < 1 or answer > rngmax:
@@ -56,10 +52,10 @@ def main(rngmax, printans, wins, guesses):
         if answer == num:
             wins = wins+1
             print("You have won", wins, "times and guessed", guesses, "times!")
-            num = random.randint(1,rngmax)
             if guesses == wins and wins > 10:
                 for index in range(10):
                     print("Stop cheating dude")
+            num = random.randint(1,rngmax)
         elif answer > num and answer < rngmax+1:
             print("Too high, try again!")
         elif answer < num and answer > 0:
